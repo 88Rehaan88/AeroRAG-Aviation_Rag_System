@@ -162,9 +162,11 @@ cd aviation-rag-system
 
 2. Create & Activate Virtual Environment
 python -m venv venv
-venv\Scripts\activate   # Windows
- OR
-source venv/bin/activate   # macOS/Linux
+- venv\Scripts\activate   # Windows
+
+OR
+
+- source venv/bin/activate   # macOS/Linux
 
 3. Install Dependencies
 pip install -r requirements.txt
@@ -210,3 +212,14 @@ Some pages contain diagrams or scanned tables. Adding an OCR pipeline (e.g., pdf
 This could be a useful upgrade as pilots could query the system hands-free. This could be added using tools like Whisper, Vosk, or Google Speech-to-Text.
 
 ------------------------------------------------------------------------------
+
+## 7. Limitations
+
+- **No image understanding** : The system only works with extracted text and structured tables. Pages that contain diagrams or image-based tables cannot be interpreted unless OCR is added.
+
+- **Not perfect for every numeric/table query:**
+While the table-aware pipeline improves accuracy, some edge-case performance tables may still be misread or ambiguously formatted, causing occasional extraction failures.
+
+- **Dependent on PDF quality:** If the original PDF has broken text, merged cells, or inconsistent formatting, table extraction may miss or distort values.
+
+- **Requires clean user input:** Queries containing unnecessary quotation marks or malformed characters may cause parsing issues.
