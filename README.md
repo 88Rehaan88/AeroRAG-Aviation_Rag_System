@@ -27,8 +27,8 @@ This system overcomes those issues by introducing a separate table-aware pipelin
 ## 2. Workflow
 
 ### System Workflow Diagram:
+<img width="1000" height="600" alt="Screenshot 2025-11-24 194344" src="https://github.com/user-attachments/assets/70ff816a-0079-45f1-bd69-4f3ac32c5d92" />
 
-![Workflow Diagram]<img width="1920" height="1079" alt="Bank details" src="https://github.com/user-attachments/assets/53b38226-d286-41d2-8dfe-aaebcf169593" />
 
 *Step 1 — Retrieval:**
 The query is embedded and sent to the FAISS index.
