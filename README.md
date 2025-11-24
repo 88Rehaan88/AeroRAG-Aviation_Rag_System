@@ -140,7 +140,7 @@ Instead of "55,800", the model returned:
 
 ## 5. Setup & Installation:
 
-#Important Note (for API queries)
+### ⚠️Important Note (for API queries)
 
 Please avoid including double-quotes (") inside your query text.
 Certain characters can interfere with request parsing in FastAPI/Swagger and may cause the query to fail.
