@@ -171,9 +171,9 @@ pip install -r requirements.txt
 
 4. Configure Environment Variables
 
-Create a .env file (or copy .env.example) and add your Gemini API key:
+  Create a .env file (or copy .env.example) and add your Gemini API key:
 
-GOOGLE_API_KEY= paste your_api_key_here
+  GOOGLE_API_KEY= paste your_api_key_here
 
 5. Preprocessing Pipeline
 
