@@ -59,56 +59,55 @@ Normal text-based.
 
 ## 3. Challenges & Solutions:
 
-*Challenge 1 — Inconsistent accuracy on text queries*
+**Challenge 1 — Inconsistent accuracy on text queries**
 
 Relying only on FAISS embeddings caused the system to miss some text-based questions.
 Similar pages and PDF noise occasionally pushed the correct answer outside the top results.
 
-*Solution:*
+Solution:
 Introducing a Gemini re-ranker greatly improved relevance. The model consistently promotes the most meaningful chunks, making text answers far more accurate and stable.
 
-Challenge 2 — Wrong page selection for numeric queries
+**Challenge 2 — Wrong page selection for numeric/table-based queries**
 
 Numeric and performance questions proved much harder. FAISS often retrieved the wrong pages because:
 
-Many performance tables look nearly identical
+- Many performance tables have nearly nearly identical table title/labels
 
-Column headers and numeric patterns repeat
+- Column headers and numeric patterns repeat
 
-Semantic differences across pages are minimal
+- Semantic differences across pages are minimal
 
-PDF text is often noisy or inconsistent
+- Since table-based pages are not numbers-heavy, semantic retrieval doesn't work very well on them. 
 
 This was the biggest challenge in the entire project, and several approaches failed before the final solution worked.
 
-Attempted Fixes (That Did Not Work)
+**Attempted Fixes (That Did Not Work):**
 
-A. Restricting FAISS to fewer results
+*A. I thought restricting FAISS to fewer results could avoid FAISS getting confused*
 Limiting FAISS to top-1 or top-2 chunks only made retrieval worse.
 The embeddings were too similar for FAISS to reliably distinguish between tables.
+So FAISS often retrieved the wrong page and hence generated answer from the wrong table. 
 
-B. Keyword or token overlap
-I tried matching chunks based on shared tokens with the query.
+*B. Keyword or token overlap:*
+Since FAISS was unable to retrieve the correct page, I tried matching chunks based on shared tokens with the query.
+The chunk/page with highest match was retrieved. 
+
 However, PDF text contained:
-
-broken words
-
-odd spacing
-
-reversed characters
-
-incomplete headers
+- broken words
+- odd spacing
+- reversed characters
+- incomplete headers
 
 This made overlap scores noisy and unreliable.
 
-C. Asking Gemini to choose the correct chunk directly
+*C. Asking Gemini to choose the correct chunk directly*
 Initially, Gemini struggled to differentiate between performance tables when only given raw page text.
 LLMs interpret numbers as plain text, not structured data, so the model couldn’t consistently identify the right table.
 
 Reason for failure:
 Unstructured, noisy page text → too ambiguous for table reasoning.
 
-Final Fix — Structured Table Extraction
+**Final Fix — Structured Table Extraction**
 
 The breakthrough came from extracting clean table data using pdfplumber and passing Gemini only the structured JSON tables instead of raw text.
 
