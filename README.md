@@ -152,3 +152,46 @@ Some pages contain diagrams or scanned tables. Adding an OCR pipeline (e.g., pdf
 
 3. Voice interaction support
 This could be a useful upgrade as pilots could query the system hands-free. This could be added using tools like Whisper, Vosk, or Google Speech-to-Text.
+
+------------------------------------------------------------------------------
+##5. Setup & Installation:
+
+1. Clone the Repository
+git clone https://github.com/88rehaan88/aviation-rag-system.git
+cd aviation-rag-system
+
+2. Create & Activate Virtual Environment
+python -m venv venv
+venv\Scripts\activate   # Windows
+# OR
+source venv/bin/activate   # macOS/Linux
+
+3. Install Dependencies
+pip install -r requirements.txt
+
+4. Configure Environment Variables
+
+Create a .env file (or copy .env.example) and add your Gemini API key:
+
+GOOGLE_API_KEY= paste your_api_key_here
+
+5. Preprocessing Pipeline
+
+Before running the API, you must run these scripts to generate this data: 
+python extract_pages.py -> data/pages.json
+python create_chunks.py -> data/chunks.json
+python build_tables.py  -> data/tables.json
+python build_indexer.py -> data/faiss.index , data/meta.json
+
+7. Running the API
+
+Start the FastAPI server:
+
+python main.py
+
+
+Once running, visit Swagger UI at:
+
+http://localhost:8000/docs
+
+And use the /query endpoint to ask questions.
