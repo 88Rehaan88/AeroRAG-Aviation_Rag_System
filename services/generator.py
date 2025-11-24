@@ -29,9 +29,8 @@ Page reference: {page}
 Rules:
 - Write a short, professional, pilot-friendly sentence.
 - Combine the context from the query with the numeric result.
-- Use good formatting: e.g., "52.2 (1000 kg)" or "55,800 kg", depending on context.
-- DO NOT invent or modify the numeric value.
-- DO NOT hallucinate extra data.
+- Use good formatting: e.g., "52.2 (1000 kg)" or "55,800 kg".
+- DO NOT modify or guess the value.
 - Only output the final answer sentence.
 """
 
@@ -65,8 +64,13 @@ def generate_answer(query: str, retrieved_chunks: list):
 
         # parsing string into float for gemini to interpret as number:
         if isinstance(numeric_value, str):
-            # If parsing fails, treat it as error
-            return numeric_value, [page]
+            try:
+                cleaned = numeric_value.replace(",", "").strip()
+                numeric_value = float(cleaned)
+            except:
+                # If parsing fails, treat it as error
+                return numeric_value, [page]
+
 
         # Rewriting in a way that sounds natural:
         natural_answer = format_numeric_natural_answer(
