@@ -178,10 +178,10 @@ GOOGLE_API_KEY= paste your_api_key_here
 5. Preprocessing Pipeline
 
 Before running the API, you must run these scripts to generate this data: 
-python extract_pages.py -> data/pages.json
-python create_chunks.py -> data/chunks.json
-python build_tables.py  -> data/tables.json
-python build_indexer.py -> data/faiss.index , data/meta.json
+- python extract_pages.py -> data/pages.json
+- python create_chunks.py -> data/chunks.json
+- python build_tables.py  -> data/tables.json
+- python build_indexer.py -> data/faiss.index , data/meta.json
 
 7. Running the API
 
