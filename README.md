@@ -1,4 +1,4 @@
-# Overwatch AI Rag System README: 
+# Overwatch AI Rag System: 
 
 ## Project Overview:
 
