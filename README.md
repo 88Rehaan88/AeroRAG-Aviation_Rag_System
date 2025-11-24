@@ -154,7 +154,7 @@ Some pages contain diagrams or scanned tables. Adding an OCR pipeline (e.g., pdf
 This could be a useful upgrade as pilots could query the system hands-free. This could be added using tools like Whisper, Vosk, or Google Speech-to-Text.
 
 ------------------------------------------------------------------------------
-##5. Setup & Installation:
+## 5. Setup & Installation:
 
 1. Clone the Repository
 git clone https://github.com/88rehaan88/aviation-rag-system.git
@@ -163,7 +163,7 @@ cd aviation-rag-system
 2. Create & Activate Virtual Environment
 python -m venv venv
 venv\Scripts\activate   # Windows
-# OR
+ OR
 source venv/bin/activate   # macOS/Linux
 
 3. Install Dependencies
