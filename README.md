@@ -26,6 +26,10 @@ This system overcomes those issues by introducing a separate table-aware pipelin
 
 ## 2. Workflow
 
+## System Workflow Diagram
+![Workflow Diagram](https://raw.githubusercontent.com/88rehaan88/aviation-rag-system/main/images/workflow.png)
+
+
 *Step 1 — Retrieval:**
 The query is embedded and sent to the FAISS index.
 
