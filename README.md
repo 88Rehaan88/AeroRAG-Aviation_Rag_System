@@ -34,7 +34,7 @@ This system overcomes those issues by introducing a separate table-aware pipelin
 ------------------------------------------------------------------------------
 
 
-*Step 1 — Retrieval:**
+*Step 1 — Retrieval:*
 The query is embedded and sent to the FAISS index.
 
 FAISS returns the top-k most similar pages/chunks.
