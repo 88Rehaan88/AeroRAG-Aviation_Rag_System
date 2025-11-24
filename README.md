@@ -1,38 +1,28 @@
 # Overwatch AI Rag System README: 
 
-This project implements a Retrieval-Augmented Generation (RAG) system capable of answering technical questions from the Boeing 737 performance manual. It handles both text-based questions and numeric/table-based aircraft performance queries with high accuracy.
+## Project Overview:
 
-The system uses a hybrid combination of:
+This project implements a Retrieval-Augmented Generation (RAG) system designed to answer technical questions from the Boeing 737 performance manual. It supports both text-based queries and numeric/table-based performance calculations, providing accurate, grounded responses with page citations.
 
-FAISS vector search
+The system combines multiple components:
 
-Gemini embeddings
+- FAISS vector search for fast semantic retrieval
 
-Gemini re-ranking
+- Gemini embeddings for high-quality vector representations
 
-Structured table extraction from the PDF using Pdfplumber
+- Gemini re-ranking for improved relevance in text-based queries
 
-LLM numeric reasoning on clean tables
+- Structured table extraction using pdfplumber
 
-Custom natural-language answer formatting
+- LLM-based numeric reasoning over clean, structured tables
 
-This gives robust, deterministic retrieval even for highly repetitive performance tables where semantic search alone fails.
+- Custom natural-language formatting for aviation-style answers
 
-## 1. Overview
+Typical RAG systems struggle with Boeing performance tables because the manual contains many near-identical pages, repeated numeric patterns, and inconsistent PDF text. Embedding models often confuse these pages, leading to wrong numeric values.
 
-Typical RAG pipelines struggle with numeric aviation queries because the manual contains:
+This system overcomes those issues by introducing a separate table-aware pipeline for numeric/performance queries. It detects numeric intent, identifies the correct performance table, extracts the required value from structured data, and formats the final answer precisely—while using the standard RAG path for normal text questions.
 
-Highly similar tables across pages
-
-Repetitive numeric patterns
-
-Minimal semantic differences between tables
-
-PDF noise and broken text
-
-Embedding models often confuse similar pages, causing incorrect numeric answers.
-
-This system solves the issue by introducing a dedicated, table-aware pipeline that separates text questions from numeric/table questions and processes each using the most reliable method.
+------------------------------------------------------------------------------
 
 ## 2. Workflow
 
@@ -140,6 +130,8 @@ page citation
 Example:
 
 “Based on the given conditions, the field limit weight is 55,800 kg (page 99).”
+
+------------------------------------------------------------------------------
 
 ## 4. Future Work:
 
