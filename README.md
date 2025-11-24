@@ -57,78 +57,91 @@ Normal text-based.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 3. Challenges & Solutions
-Challenge 1 — Inconsistent accuracy on text queries
+## 3. Challenges & Solutions:
 
-Initial retrieval purely on FAISS embeddings was not enough and the model failed to answer some normal test based queries
+*Challenge 1 — Inconsistent accuracy on text queries*
 
-Solution:
-Adding a Gemini re-ranker dramatically improved accuracy and robustness.
+Relying only on FAISS embeddings caused the system to miss some text-based questions.
+Similar pages and PDF noise occasionally pushed the correct answer outside the top results.
+
+*Solution:*
+Introducing a Gemini re-ranker greatly improved relevance. The model consistently promotes the most meaningful chunks, making text answers far more accurate and stable.
 
 Challenge 2 — Wrong page selection for numeric queries
 
-FAISS frequently retrieved the wrong pages because:
+Numeric and performance questions proved much harder. FAISS often retrieved the wrong pages because:
 
-Tables look almost identical
+Many performance tables look nearly identical
 
-Column labels repeat
+Column headers and numeric patterns repeat
 
-Numbers repeat widely
+Semantic differences across pages are minimal
 
-Semantically, pages are nearly indistinguishable
+PDF text is often noisy or inconsistent
 
-This was the biggest challenge that I faced. I tried various methods to solve this. 
+This was the biggest challenge in the entire project, and several approaches failed before the final solution worked.
 
-Attempted fixes that did not work
+Attempted Fixes (That Did Not Work)
+
 A. Restricting FAISS to fewer results
+Limiting FAISS to top-1 or top-2 chunks only made retrieval worse.
+The embeddings were too similar for FAISS to reliably distinguish between tables.
 
-I limited FAISS to return top 1–2 chunks to avoid confusion instead of the usual top 4-5 chunks,
-Result: Failed because the embeddings were too similar for Faiss to distinguish.
+B. Keyword or token overlap
+I tried matching chunks based on shared tokens with the query.
+However, PDF text contained:
 
-B. Keyword overlap between query and chunks:
+broken words
 
-Idea: I tried to select the chunk with maximum number of token overlaps with query. 
-But chunk text from PDFs was very noisy (broken words, weird symbols, reversed text).
-Result:  Failed because Overlap scores were unstable.
+odd spacing
 
-C. Asking Gemini to choose the right chunk initially failed:
+reversed characters
 
-But raw chunk text was unstructured—Gemini interpreted numeric values as plain text.
-Result: Failed because chunks were Unreliable and inconsistent.
+incomplete headers
 
-When Gemini was given page text chunks, it couldn’t reliably distinguish similar tables.
+This made overlap scores noisy and unreliable.
 
-Reason:
-LLMs interpret numbers as text, not structured data → too much noise.
+C. Asking Gemini to choose the correct chunk directly
+Initially, Gemini struggled to differentiate between performance tables when only given raw page text.
+LLMs interpret numbers as plain text, not structured data, so the model couldn’t consistently identify the right table.
 
-Fix:
-Extract tables using pdfplumber and send Gemini only clean, structured JSON tables.
+Reason for failure:
+Unstructured, noisy page text → too ambiguous for table reasoning.
 
-This immediately solved table selection errors.
+Final Fix — Structured Table Extraction
 
-Challenge 5 — Raw numeric answers had no units or explanation
+The breakthrough came from extracting clean table data using pdfplumber and passing Gemini only the structured JSON tables instead of raw text.
 
-Gemini initially returned:
+Once Gemini worked with:
+
+clean rows
+
+clean columns
+
+consistent numeric cells
+
+…it immediately started choosing the correct table and returning accurate numeric values.
+
+Challenge 3 — Raw numeric answers lacked clarity
+
+Gemini initially returned bare numbers like:
 
 52.2
+
 55.8
 
-
-Not acceptable.
+These lacked units, context, and professional phrasing.
 
 Solution:
-A final formatting prompt rewrites the numeric result into:
-
-natural aviation style
+A dedicated formatting step rewrites the extracted number into a clear, aviation-style sentence with:
 
 proper units
 
-correct phrasing
+concise explanation
 
-page citation
+and the correct page reference
 
 Example:
-
 “Based on the given conditions, the field limit weight is 55,800 kg (page 99).”
 
 ------------------------------------------------------------------------------
