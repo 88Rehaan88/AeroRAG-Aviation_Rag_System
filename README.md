@@ -27,7 +27,7 @@ This system overcomes those issues by introducing a separate table-aware pipelin
 ## 2. Workflow
 
 ### System Workflow Diagram:
-<img width="1000" height="600" alt="Screenshot 2025-11-24 194344" src="https://github.com/user-attachments/assets/70ff816a-0079-45f1-bd69-4f3ac32c5d92" />
+<img width="800" height="400" alt="Screenshot 2025-11-24 194344" src="https://github.com/user-attachments/assets/70ff816a-0079-45f1-bd69-4f3ac32c5d92" />
 
 
 *Step 1 — Retrieval:**
