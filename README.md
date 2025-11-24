@@ -137,20 +137,14 @@ Instead of "55,800", the model returned:
 
 ------------------------------------------------------------------------------
 
-## 4. Future Work:
 
-1. Improved table extraction
-pdfplumber can miss tables with merged cells, irregular borders, or multi-line headers.
-Using tools like Camelot or Tabula would provide much more accurate and consistent table detection.
-
-2. OCR for image-based pages
-Some pages contain diagrams or scanned tables. Adding an OCR pipeline (e.g., pdf2image + Tesseract or Gemini Vision) would allow the system to extract data even from non-text PDFs.
-
-3. Voice interaction support
-This could be a useful upgrade as pilots could query the system hands-free. This could be added using tools like Whisper, Vosk, or Google Speech-to-Text.
-
-------------------------------------------------------------------------------
 ## 5. Setup & Installation:
+
+#Important Note (for API queries)
+
+Please avoid including double-quotes (") inside your query text.
+Certain characters can interfere with request parsing in FastAPI/Swagger and may cause the query to fail.
+Use normal text instead of quoted phrases.
 
 1. Clone the Repository
 git clone https://github.com/88rehaan88/aviation-rag-system.git
@@ -191,3 +185,18 @@ Once running, visit Swagger UI at:
 http://localhost:8000/docs
 
 And use the /query endpoint to ask questions.
+
+------------------------------------------------------
+## 6. Future Work:
+
+1. Improved table extraction
+pdfplumber can miss tables with merged cells, irregular borders, or multi-line headers.
+Using tools like Camelot or Tabula would provide much more accurate and consistent table detection.
+
+2. OCR for image-based pages
+Some pages contain diagrams or scanned tables. Adding an OCR pipeline (e.g., pdf2image + Tesseract or Gemini Vision) would allow the system to extract data even from non-text PDFs.
+
+3. Voice interaction support
+This could be a useful upgrade as pilots could query the system hands-free. This could be added using tools like Whisper, Vosk, or Google Speech-to-Text.
+
+------------------------------------------------------------------------------
