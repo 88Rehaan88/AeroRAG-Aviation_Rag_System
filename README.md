@@ -95,12 +95,12 @@ The chunk/page with highest match was retrieved.
 However, PDF text contained:
 - broken words
 - odd spacing
-- reversed characters
 - incomplete headers
 
 This made overlap scores noisy and unreliable.
 
 *C. Asking Gemini to choose the correct chunk directly*
+
 Initially, Gemini struggled to differentiate between performance tables when only given raw page text.
 LLMs interpret numbers as plain text, not structured data, so the model couldn’t consistently identify the right table.
 
@@ -111,37 +111,29 @@ Unstructured, noisy page text → too ambiguous for table reasoning.
 
 The breakthrough came from extracting clean table data using pdfplumber and passing Gemini only the structured JSON tables instead of raw text.
 
-Once Gemini worked with:
+Once Gemini worked with clean rows, clean columns and consistent numeric cells, it immediately started choosing the correct table and returning accurate numeric values.
 
-clean rows
 
-clean columns
+**Challenge 3 — Raw numeric answers lacked clarity**
 
-consistent numeric cells
-
-…it immediately started choosing the correct table and returning accurate numeric values.
-
-Challenge 3 — Raw numeric answers lacked clarity
-
-Gemini initially returned bare numbers like:
-
-52.2
-
-55.8
+For numeric/table-based queries, Gemini initially answered with bare numbers like: 
+- 52.2
+- 55.8
 
 These lacked units, context, and professional phrasing.
 
 Solution:
 A dedicated formatting step rewrites the extracted number into a clear, aviation-style sentence with:
 
-proper units
+- proper units
 
-concise explanation
+- concise explanation
 
-and the correct page reference
+- and the correct page reference
 
 Example:
-“Based on the given conditions, the field limit weight is 55,800 kg (page 99).”
+Instead of "55,800", the model returned: 
+-> “Based on the given conditions, the field limit weight is 55,800 kg (page 99).”
 
 ------------------------------------------------------------------------------
 
