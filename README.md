@@ -141,63 +141,14 @@ Example:
 
 “Based on the given conditions, the field limit weight is 55,800 kg (page 99).”
 
-4. Future Work
-1. Use Camelot/Tabula for more accurate table extraction
+## 4. Future Work:
 
-pdfplumber misses:
-
-merged cells
-
-inconsistent table borders
-
-multi-line headers
-
-Camelot (Lattice/Stream) can improve table accuracy significantly.
+1. Improved table extraction
+pdfplumber can miss tables with merged cells, irregular borders, or multi-line headers.
+Using tools like Camelot or Tabula would provide much more accurate and consistent table detection.
 
 2. OCR for image-based pages
+Some pages contain diagrams or scanned tables. Adding an OCR pipeline (e.g., pdf2image + Tesseract or Gemini Vision) would allow the system to extract data even from non-text PDFs.
 
-Some pages in the manual contain diagrams or scanned tables.
-Future improvement:
-
-pdf2image → Tesseract
-
-or Gemini Vision table extraction
-
-This expands coverage to OCR-only pages.
-
-3. Build a dedicated FAISS table index
-
-Instead of indexing page-text, index the tables themselves.
-This would allow:
-
-direct table lookup
-
-less ambiguity
-
-faster numeric resolution
-
-4. Add interpolation
-
-Aircraft performance tables often require:
-
-altitude interpolation
-
-OAT interpolation
-
-field-length interpolation
-
-A future module can implement deterministic interpolation logic similar to airline EFBs.
-
-5. Automated evaluation suite
-
-Add a test harness to measure:
-
-table selection accuracy
-
-numeric correctness
-
-page citation consistency
-
-hallucination rate
-
-Useful for regression testing before deployment.
+3. Voice interaction support
+This could be a useful upgrade as pilots could query the system hands-free. This could be added using tools like Whisper, Vosk, or Google Speech-to-Text.
