@@ -146,6 +146,8 @@ Please avoid including double-quotes (") inside your query text.
 Certain characters can interfere with request parsing in FastAPI/Swagger and may cause the query to fail.
 Use normal text instead of quoted phrases.
 
+-----------------------------------------------------------------------------
+
 1. Clone the Repository
 git clone https://github.com/88rehaan88/aviation-rag-system.git
 cd aviation-rag-system
