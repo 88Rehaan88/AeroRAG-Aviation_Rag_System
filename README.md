@@ -26,9 +26,9 @@ This system overcomes those issues by introducing a separate table-aware pipelin
 
 ## 2. Workflow
 
-## System Workflow Diagram
-![Workflow Diagram](https://raw.githubusercontent.com/88rehaan88/aviation-rag-system/main/images/workflow.png)
+### System Workflow Diagram:
 
+![Workflow Diagram]<img width="1920" height="1079" alt="Bank details" src="https://github.com/user-attachments/assets/53b38226-d286-41d2-8dfe-aaebcf169593" />
 
 *Step 1 — Retrieval:**
 The query is embedded and sent to the FAISS index.
