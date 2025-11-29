@@ -97,7 +97,7 @@ The embeddings were too similar for FAISS to reliably distinguish between tables
 So FAISS often retrieved the wrong page and hence generated answer from the wrong table. 
 
 *B. Keyword or token overlap:*
-Since FAISS was unable to retrieve the correct page, I tried matching chunks based on shared tokens with the query.
+Since FAISS was unable to retrieve the correct page, I tried matching table labels of each chunk based on shared tokens with the query.
 The chunk/page with highest match was retrieved. 
 
 However, PDF text contained:
