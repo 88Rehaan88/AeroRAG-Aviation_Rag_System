@@ -83,9 +83,9 @@ Numeric and performance questions proved much harder. FAISS often retrieved the 
 
 - Column headers and numeric patterns repeat
 
-- Semantic differences across pages are minimal
+- Semantic differences across table pages are minimal
 
-- Since table-based pages are not numbers-heavy, semantic retrieval doesn't work very well on them. 
+- Since table-based pages are numbers-heavy, semantic retrieval doesn't work very well on them. 
 
 This was the biggest challenge in the entire project, and several approaches failed before the final solution worked.
 
