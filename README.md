@@ -1,4 +1,4 @@
-# Overwatch AI Rag System: 
+# AeroRAG: High-Precision Hybrid RAG for Aviation Manuals: 
 
 ## Project Overview:
 
